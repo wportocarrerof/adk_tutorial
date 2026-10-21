@@ -8,7 +8,7 @@ from google.adk.sessions import InMemorySessionService
 from google.genai.types import Content, Part
 
 # Import the new trip agent
-from trip_agent import root_agent
+from agent import root_agent
 
 async def main():
     print("🤖 Initializing Trip Planner Agent CLI...")

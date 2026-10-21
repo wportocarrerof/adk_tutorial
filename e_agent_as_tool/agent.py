@@ -1,3 +1,4 @@
+import os
 from google.adk.tools import google_search
 from google.adk.tools.agent_tool import AgentTool 
 from google.adk.agents.invocation_context import InvocationContext
@@ -10,13 +11,15 @@ from typing import AsyncGenerator
 
 load_dotenv()
 
+DEFAULT_MODEL = os.getenv("ADK_MODEL", "gemini-flash-latest")
+
 
 # --- 1. Define the Specialist "Tool" Agents ---
 # These are the expert agents that our main agent will use as tools.
 
 location_scout_agent = Agent(
     name="LocationScoutAgent",
-    model="gemini-flash-latest",
+    model=DEFAULT_MODEL,
     tools=[google_search],
     description="Finds a specific type of location (like a museum, restaurant, or park) based on a user's request in or around Sunnyvale, CA. Returns only the name of the location.",
     instruction="""
@@ -28,7 +31,7 @@ location_scout_agent = Agent(
 
 logistics_validator_agent = Agent(
     name="LogisticsValidatorAgent",
-    model="gemini-flash-latest",
+    model=DEFAULT_MODEL,
     tools=[google_search],
     description="Calculates the travel time between two locations or finds the operating hours for a single location.",
     instruction="""
@@ -43,7 +46,7 @@ logistics_validator_agent = Agent(
 
 trip_architect_agent = Agent(
     name="TripArchitectAgent",
-    model="gemini-flash-latest",
+    model=DEFAULT_MODEL,
     instruction="""
     You are an Autonomous Trip Architect. Your goal is to take a single user request and build a complete, logistically-sound itinerary in one go, without asking for feedback. You must make intelligent decisions and corrections on the user's behalf.
 

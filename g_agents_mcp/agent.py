@@ -1,11 +1,11 @@
-# agents/trip_agent.py
+import os
 from google.adk.agents import Agent
 from toolbox_core import ToolboxSyncClient
 from dotenv import load_dotenv
 
-# Import our new memory tools
-
 load_dotenv()
+
+DEFAULT_MODEL = os.getenv("ADK_MODEL", "gemini-flash-latest")
 
 # Connect to the MCP Toolbox server running on port 7001
 # Note the different port number from the previous lab.
@@ -15,8 +15,8 @@ toolbox = ToolboxSyncClient("http://127.0.0.1:7001")
 tools = toolbox.load_toolset('trip-planner-tools')
 
 # Define the Trip Agent
-root_agent = Agent(
-    model='gemini-flash-latest',
+trip_planner_agent = Agent(
+    model=DEFAULT_MODEL,
     name='trip_planner_agent',
     description='Agent that helps users plan trips by finding destinations.',
     instruction="""
@@ -42,4 +42,5 @@ root_agent = Agent(
     tools=tools,
 )
 
+root_agent = trip_planner_agent
 print("🤖 Trip Planner Agent is ready.")

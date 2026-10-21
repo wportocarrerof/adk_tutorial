@@ -7,7 +7,7 @@ from pathlib import Path
 from google.adk.runners import Runner
 from google.adk.sessions import DatabaseSessionService
 from google.genai.types import Content, Part
-from agents import root_agent
+from agent import root_agent
 
 # --- Configuration ---
 SESSIONS_DIR = Path(os.path.expanduser("~")) / ".adk" / "sessions"

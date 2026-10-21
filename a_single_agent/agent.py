@@ -1,12 +1,15 @@
+import os
 from google.adk.agents import Agent
 from google.adk.tools import google_search
 from dotenv import load_dotenv
 
 load_dotenv()
 
-root_agent = Agent(
+DEFAULT_MODEL = os.getenv("ADK_MODEL", "gemini-flash-latest")
+
+planner_agent = Agent(
     name="planner_agent",
-    model="gemini-flash-latest",
+    model=DEFAULT_MODEL,
     description="Agent tasked with generating creative and fun dating plan suggestions",
     instruction="""
         You are a specialized AI assistant tasked with generating creative and fun plan suggestions.
@@ -28,3 +31,5 @@ root_agent = Agent(
     """,
     tools=[google_search]
 )
+
+root_agent = planner_agent

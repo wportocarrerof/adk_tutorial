@@ -2,6 +2,13 @@
 
 echo "🚀 Starting ADK Web UI with persistent session storage..."
 
+# Activate virtual environment if available
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/../.adk_env/bin/activate" ]; then
+    echo "📦 Activating virtual environment (.adk_env)..."
+    source "$SCRIPT_DIR/../.adk_env/bin/activate"
+fi
+
 # Create sessions directory if it doesn't exist
 SESSIONS_DIR="$HOME/.adk/sessions"
 mkdir -p "$SESSIONS_DIR"
