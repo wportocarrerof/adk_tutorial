@@ -36,7 +36,6 @@ restaurant_finder_agent = Agent(
     output_key="restaurant_result" # Set the correct output key for this workflow
 )
 
-
 # ✨ The ParallelAgent runs all three specialists at once ✨
 parallel_research_agent = ParallelAgent(
     name="parallel_research_agent",
